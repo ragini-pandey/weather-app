@@ -54,18 +54,45 @@ export default function App() {
 
   if (!hasSearched && !loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 px-4">
-        <div className="flex flex-col items-center w-full animate-fade-in-up">
-          <div className="text-5xl sm:text-6xl mb-4">🌤️</div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-center mb-2 text-slate-800">
-            Weather Dashboard
-          </h1>
-          <p className="text-center text-muted-foreground mb-8 max-w-md">
-            Get detailed forecasts, interactive charts, and 7-day outlooks
-            for any location worldwide.
-          </p>
-          <SearchForm onSearch={handleSearch} loading={loading} />
+      <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+        <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
+          <div className="flex flex-col items-center w-full animate-fade-in-up">
+            <div className="relative mb-6">
+              <div className="text-6xl sm:text-7xl animate-glow">🌤️</div>
+            </div>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-center mb-3 text-slate-800 tracking-tight">
+              Weather Dashboard
+            </h1>
+            <p className="text-center text-muted-foreground mb-10 max-w-lg text-base sm:text-lg">
+              Get detailed forecasts, interactive charts, and 7-day outlooks
+              for any location worldwide.
+            </p>
+            <SearchForm onSearch={handleSearch} loading={loading} />
+            <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-lg w-full text-center">
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-2xl">🌡️</span>
+                <span className="text-xs text-muted-foreground">Temperature</span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-2xl">🌧️</span>
+                <span className="text-xs text-muted-foreground">Precipitation</span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-2xl">💨</span>
+                <span className="text-xs text-muted-foreground">Wind Speed</span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <span className="text-2xl">☀️</span>
+                <span className="text-xs text-muted-foreground">UV Index</span>
+              </div>
+            </div>
+          </div>
         </div>
+        <footer className="text-center py-4 text-muted-foreground text-xs">
+          Powered by{" "}
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer"
+            className="text-primary hover:underline">Open-Meteo</a>{" "}— Free Weather API
+        </footer>
       </div>
     )
   }

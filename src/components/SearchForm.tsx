@@ -152,17 +152,17 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
   }
 
   return (
-    <Card className="w-full max-w-xl shadow-xl border-0">
+    <Card className="w-full max-w-xl shadow-xl border-0 backdrop-blur-sm bg-white/80">
       <CardHeader className="text-center pb-2">
-        <CardDescription>Enter coordinates or pick a city to get started</CardDescription>
+        <CardDescription className="text-sm">Enter coordinates or pick a city to get started</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-5">
         <div className="flex flex-wrap justify-center gap-2">
           {CAPITAL_CITIES.slice(0, 5).map((loc) => (
             <Badge
               key={loc.label}
               variant="outline"
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors px-3 py-1.5"
+              className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all duration-200 px-3 py-1.5 hover:scale-105"
               onClick={() => handlePreset(loc)}
             >
               <MapPin className="h-3 w-3 mr-1" />
