@@ -7,6 +7,7 @@ import TemperatureChart from "./components/TemperatureChart"
 import PrecipitationChart from "./components/PrecipitationChart"
 import WindChart from "./components/WindChart"
 import UVIndexChart from "./components/UVIndexChart"
+import DailyForecast from "./components/DailyForecast"
 import ErrorMessage from "./components/ErrorMessage"
 import Loader from "./components/Loader"
 
@@ -98,6 +99,7 @@ export default function App() {
             <PrecipitationChart daily={weatherData.daily as never} />
             <WindChart daily={weatherData.daily as never} />
             <UVIndexChart daily={weatherData.daily as never} />
+            <DailyForecast daily={weatherData.daily as never} />
           </div>
         )}
       </div>
