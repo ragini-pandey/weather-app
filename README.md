@@ -2,6 +2,8 @@
 
 A modern weather forecast dashboard built with React, TypeScript, and Vite. Get detailed 7-day forecasts, interactive charts, and real-time weather data for any location worldwide.
 
+**Live Demo:** [weather-app-ragini.vercel.app](https://weather-app-ragini.vercel.app/)
+
 ## Features
 
 - **Current Weather** — Real-time temperature, wind speed, wind direction, and weather conditions
@@ -36,19 +38,48 @@ Weather data is provided by [Open-Meteo](https://open-meteo.com/) — a free, op
 
 ## Getting Started
 
+### Prerequisites
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+
+### Installation
+
 ```bash
+# Clone the repository
+git clone https://github.com/ragini-pandey/weather-app.git
+
+# Navigate into the project
+cd weather-app
+
 # Install dependencies
 npm install
+```
 
-# Start development server
+### Running Locally
+
+```bash
+# Start the development server
 npm run dev
+```
 
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build & Preview
+
+```bash
 # Build for production
 npm run build
 
-# Preview production build
+# Preview the production build locally
 npm run preview
 ```
+
+### Usage
+
+1. Enter latitude, longitude, start date, and end date — or pick a city from the presets.
+2. Click **Search** to fetch weather data.
+3. Explore current conditions, temperature trends, precipitation, wind, UV index, and the 7-day forecast.
 
 ## Project Structure
 
