@@ -4,6 +4,7 @@ import { fetchWeather } from "./services/weatherApi"
 import SearchForm from "./components/SearchForm"
 import CurrentWeather from "./components/CurrentWeather"
 import PrecipitationChart from "./components/PrecipitationChart"
+import WindChart from "./components/WindChart"
 import ErrorMessage from "./components/ErrorMessage"
 import Loader from "./components/Loader"
 
@@ -92,6 +93,7 @@ export default function App() {
           <div className="space-y-6 page-enter">
             <CurrentWeather data={weatherData} />
             <PrecipitationChart daily={weatherData.daily as never} />
+            <WindChart daily={weatherData.daily as never} />
           </div>
         )}
       </div>
