@@ -1,75 +1,79 @@
-# React + TypeScript + Vite
+# Weather Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern weather forecast dashboard built with React, TypeScript, and Vite. Get detailed 7-day forecasts, interactive charts, and real-time weather data for any location worldwide.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Current Weather** — Real-time temperature, wind speed, wind direction, and weather conditions
+- **Temperature Trend** — Area chart showing daily high/low and feels-like temperatures
+- **Precipitation** — Composed chart with rain, snow, and precipitation probability
+- **Wind Speed & Gusts** — Line chart tracking max wind speed and gusts over 7 days
+- **UV Index** — Color-coded bar chart with severity levels (Low to Extreme)
+- **7-Day Forecast** — Daily weather cards with icons, temperatures, and key metrics
+- **City Presets** — Quick-pick from 20 major world capitals
+- **Responsive Design** — Optimized for mobile, tablet, and desktop
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- **React 19** + **TypeScript**
+- **Vite 8** — Fast build tooling
+- **Tailwind CSS 4** — Utility-first styling with shadcn theme
+- **Recharts** — Interactive charts (Area, Composed, Line, Bar)
+- **Axios** — HTTP client for API requests
+- **date-fns** — Date formatting and manipulation
+- **lucide-react** — Icon library
+- **shadcn/ui** — UI components (Card, Button, Input, Badge, Alert, Dialog, Select, etc.)
 
-Note: This will impact Vite dev & build performances.
+## API
 
-## Expanding the ESLint configuration
+Weather data is provided by [Open-Meteo](https://open-meteo.com/) — a free, open-source weather API. No API key required.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Endpoint:** `https://api.open-meteo.com/v1/forecast`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Data fetched:**
+- Current weather (temperature, wind, weather code)
+- Daily: temperature max/min, apparent temperature, precipitation, rain, snowfall, wind speed/gusts, wind direction, UV index, weather code, sunrise/sunset
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+├── App.tsx                     # Main app with landing + dashboard views
+├── index.css                   # Tailwind theme, animations, global styles
+├── main.tsx                    # Entry point
+├── services/
+│   └── weatherApi.ts           # Open-Meteo API client
+├── components/
+│   ├── SearchForm.tsx          # Search form with city presets + coordinate inputs
+│   ├── CurrentWeather.tsx      # Current weather banner
+│   ├── TemperatureChart.tsx    # Temperature trend area chart
+│   ├── PrecipitationChart.tsx  # Precipitation composed chart
+│   ├── WindChart.tsx           # Wind speed line chart
+│   ├── UVIndexChart.tsx        # UV index bar chart
+│   ├── DailyForecast.tsx       # 7-day forecast cards
+│   ├── ErrorMessage.tsx        # Error alert
+│   ├── Loader.tsx              # Loading spinner
+│   └── ui/                     # shadcn UI primitives
+└── lib/
+    └── utils.ts                # Tailwind class merge utility
+```
+
+## License
+
+ISC
