@@ -3,6 +3,7 @@ import { format, addDays, parseISO } from "date-fns"
 import { fetchWeather } from "./services/weatherApi"
 import SearchForm from "./components/SearchForm"
 import CurrentWeather from "./components/CurrentWeather"
+import TemperatureChart from "./components/TemperatureChart"
 import PrecipitationChart from "./components/PrecipitationChart"
 import WindChart from "./components/WindChart"
 import ErrorMessage from "./components/ErrorMessage"
@@ -92,6 +93,7 @@ export default function App() {
         {weatherData && (
           <div className="space-y-6 page-enter">
             <CurrentWeather data={weatherData} />
+            <TemperatureChart daily={weatherData.daily as never} />
             <PrecipitationChart daily={weatherData.daily as never} />
             <WindChart daily={weatherData.daily as never} />
           </div>
