@@ -1,4 +1,5 @@
-import * as DialogPrimitive from "@base-ui/react/dialog"
+import React from "react"
+import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -6,7 +7,7 @@ const Dialog = DialogPrimitive.Root
 const DialogTrigger = DialogPrimitive.Trigger
 const DialogClose = DialogPrimitive.Close
 
-const DialogOverlay = ({ className, ...props }) => (
+const DialogOverlay = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Backdrop>) => (
   <DialogPrimitive.Backdrop
     className={cn(
       "fixed inset-0 z-50 bg-black/50",
@@ -16,7 +17,7 @@ const DialogOverlay = ({ className, ...props }) => (
   />
 )
 
-const DialogContent = ({ className, children, ...props }) => (
+const DialogContent = ({ className, children, ...props }: React.ComponentProps<typeof DialogPrimitive.Popup>) => (
   <DialogPrimitive.Portal>
     <DialogOverlay />
     <DialogPrimitive.Popup
@@ -35,14 +36,14 @@ const DialogContent = ({ className, children, ...props }) => (
   </DialogPrimitive.Portal>
 )
 
-const DialogHeader = ({ className, ...props }) => (
+const DialogHeader = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     className={cn("flex flex-col space-y-1.5 text-center sm:text-left", className)}
     {...props}
   />
 )
 
-const DialogFooter = ({ className, ...props }) => (
+const DialogFooter = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div
     className={cn(
       "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
@@ -52,7 +53,7 @@ const DialogFooter = ({ className, ...props }) => (
   />
 )
 
-const DialogTitle = ({ className, ...props }) => (
+const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) => (
   <DialogPrimitive.Title
     className={cn(
       "text-lg font-semibold leading-none tracking-tight",
@@ -62,7 +63,7 @@ const DialogTitle = ({ className, ...props }) => (
   />
 )
 
-const DialogDescription = ({ className, ...props }) => (
+const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) => (
   <DialogPrimitive.Description
     className={cn("text-sm text-[var(--text)]", className)}
     {...props}
