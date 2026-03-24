@@ -40,21 +40,21 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
 
   return (
     <Card className="overflow-hidden border-0 shadow-lg animate-fade-in-up">
-      <div className="bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 text-white p-4 sm:p-6 md:p-8">
-        <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-6">
-          <div className="text-5xl sm:text-7xl">{icon}</div>
-          <div className="text-center md:text-left">
-            <p className="text-[10px] sm:text-xs uppercase tracking-widest opacity-80">Current Weather</p>
-            <p className="text-3xl sm:text-5xl font-bold leading-tight">{cw.temperature}°C</p>
-            <p className="text-base sm:text-lg opacity-90 mt-1">{description}</p>
+      <div className="bg-gradient-to-br from-blue-500 via-blue-600 to-indigo-600 text-white p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+          <div className="text-3xl sm:text-4xl">{icon}</div>
+          <div className="text-center sm:text-left">
+            <p className="text-[9px] sm:text-[10px] uppercase tracking-widest opacity-80">Current Weather</p>
+            <p className="text-2xl sm:text-3xl font-bold leading-tight">{cw.temperature}°C</p>
+            <p className="text-sm opacity-90">{description}</p>
           </div>
-          <div className="flex md:flex-col gap-3 md:ml-auto">
-            <div className="flex items-center gap-2 bg-white/15 rounded-xl px-4 py-2 text-sm">
-              <Wind className="h-4 w-4" />
+          <div className="flex sm:flex-col gap-2 sm:ml-auto">
+            <div className="flex items-center gap-1.5 bg-white/15 rounded-lg px-3 py-1.5 text-xs">
+              <Wind className="h-3.5 w-3.5" />
               <span>{cw.windspeed} km/h</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/15 rounded-xl px-4 py-2 text-sm">
-              <Compass className="h-4 w-4" />
+            <div className="flex items-center gap-1.5 bg-white/15 rounded-lg px-3 py-1.5 text-xs">
+              <Compass className="h-3.5 w-3.5" />
               <span>{cw.winddirection}°</span>
             </div>
           </div>

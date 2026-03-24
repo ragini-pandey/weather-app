@@ -95,10 +95,13 @@ export default function App() {
         {weatherData && (
           <div className="space-y-6 page-enter">
             <CurrentWeather data={weatherData} />
-            <TemperatureChart daily={weatherData.daily as never} />
-            <PrecipitationChart daily={weatherData.daily as never} />
-            <WindChart daily={weatherData.daily as never} />
-            <UVIndexChart daily={weatherData.daily as never} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <TemperatureChart daily={weatherData.daily as never} />
+              <PrecipitationChart daily={weatherData.daily as never} />
+              <WindChart daily={weatherData.daily as never} />
+              <UVIndexChart daily={weatherData.daily as never} />
+            </div>
+            <hr className="border-border my-4" />
             <DailyForecast daily={weatherData.daily as never} />
           </div>
         )}
