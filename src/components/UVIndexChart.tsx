@@ -11,24 +11,31 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts"
-
-const UV_COLORS = ["#4ade80", "#a3e635", "#facc15", "#fb923c", "#ef4444", "#a855f7"]
+import {
+  UV_COLORS,
+  UV_COLOR_THRESHOLDS,
+  UV_LABEL_THRESHOLDS,
+  UV_LABEL_EXTREME,
+  DATE_FORMAT_SHORT_DAY,
+  DATE_FORMAT_MONTH_DAY,
+  CHART_HEIGHT,
+  CHART_MARGIN,
+  CHART_TICK_FONT_SIZE,
+  CHART_GRID_STROKE,
+} from "@/constants"
 
 function getUVColor(uv: number) {
-  if (uv <= 2) return UV_COLORS[0]
-  if (uv <= 4) return UV_COLORS[1]
-  if (uv <= 6) return UV_COLORS[2]
-  if (uv <= 8) return UV_COLORS[3]
-  if (uv <= 10) return UV_COLORS[4]
-  return UV_COLORS[5]
+  for (let i = 0; i < UV_COLOR_THRESHOLDS.length; i++) {
+    if (uv <= UV_COLOR_THRESHOLDS[i]) return UV_COLORS[i]
+  }
+  return UV_COLORS[UV_COLORS.length - 1]
 }
 
 function getUVLabel(uv: number) {
-  if (uv <= 2) return "Low"
-  if (uv <= 5) return "Moderate"
-  if (uv <= 7) return "High"
-  if (uv <= 10) return "Very High"
-  return "Extreme"
+  for (const t of UV_LABEL_THRESHOLDS) {
+    if (uv <= t.max) return t.label
+  }
+  return UV_LABEL_EXTREME
 }
 
 interface DailyData {
@@ -40,8 +47,8 @@ export default function UVIndexChart({ daily }: { daily: DailyData | null }) {
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({
-    date: format(parseISO(date), "EEE"),
-    fullDate: format(parseISO(date), "MMM d"),
+    date: format(parseISO(date), DATE_FORMAT_SHORT_DAY),
+    fullDate: format(parseISO(date), DATE_FORMAT_MONTH_DAY),
     uv: daily.uv_index_max[i],
   }))
 
@@ -51,11 +58,11 @@ export default function UVIndexChart({ daily }: { daily: DailyData | null }) {
         <Sun className="h-7 w-7 sm:h-10 sm:w-10 text-amber-500 animate-glow" />
         UV Index
       </h3>
-      <ResponsiveContainer width="100%" height={250}>
-        <BarChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-          <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-          <YAxis tick={{ fontSize: 12 }} domain={[0, "auto"]} />
+      <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
+        <BarChart data={data} margin={CHART_MARGIN}>
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_STROKE} />
+          <XAxis dataKey="date" tick={{ fontSize: CHART_TICK_FONT_SIZE }} />
+          <YAxis tick={{ fontSize: CHART_TICK_FONT_SIZE }} domain={[0, "auto"]} />
           <Tooltip
             formatter={(value) => [`${value} (${getUVLabel(Number(value))})`, "UV Index"]}
             labelFormatter={(_, payload) => payload?.[0]?.payload?.fullDate || ""}

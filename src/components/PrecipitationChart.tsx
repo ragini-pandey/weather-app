@@ -12,6 +12,15 @@ import {
   Line,
   ComposedChart,
 } from "recharts"
+import {
+  DATE_FORMAT_SHORT_DAY,
+  DATE_FORMAT_MONTH_DAY,
+  CHART_HEIGHT,
+  CHART_MARGIN,
+  CHART_TICK_FONT_SIZE,
+  CHART_GRID_STROKE,
+  CHART_COLORS,
+} from "@/constants"
 
 interface DailyData {
   time: string[]
@@ -25,8 +34,8 @@ export default function PrecipitationChart({ daily }: { daily: DailyData | null 
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({
-    date: format(parseISO(date), "EEE"),
-    fullDate: format(parseISO(date), "MMM d"),
+    date: format(parseISO(date), DATE_FORMAT_SHORT_DAY),
+    fullDate: format(parseISO(date), DATE_FORMAT_MONTH_DAY),
     rain: daily.rain_sum[i],
     snow: daily.snowfall_sum[i],
     total: daily.precipitation_sum[i],
@@ -39,12 +48,12 @@ export default function PrecipitationChart({ daily }: { daily: DailyData | null 
         <CloudRain className="h-7 w-7 sm:h-10 sm:w-10 text-blue-500 animate-rainfall" />
         Precipitation
       </h3>
-      <ResponsiveContainer width="100%" height={250}>
-        <ComposedChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-          <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-          <YAxis yAxisId="left" tick={{ fontSize: 12 }} tickFormatter={(v) => `${v}mm`} />
-          <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 12 }} tickFormatter={(v) => `${v}%`} domain={[0, 100]} />
+      <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
+        <ComposedChart data={data} margin={CHART_MARGIN}>
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_STROKE} />
+          <XAxis dataKey="date" tick={{ fontSize: CHART_TICK_FONT_SIZE }} />
+          <YAxis yAxisId="left" tick={{ fontSize: CHART_TICK_FONT_SIZE }} tickFormatter={(v) => `${v}mm`} />
+          <YAxis yAxisId="right" orientation="right" tick={{ fontSize: CHART_TICK_FONT_SIZE }} tickFormatter={(v) => `${v}%`} domain={[0, 100]} />
           <Tooltip
             formatter={(value, name) => {
               const labels: Record<string, string> = { rain: "Rain", snow: "Snow", probability: "Probability" }
@@ -54,9 +63,9 @@ export default function PrecipitationChart({ daily }: { daily: DailyData | null 
             labelFormatter={(_, payload) => payload?.[0]?.payload?.fullDate || ""}
           />
           <Legend />
-          <Bar yAxisId="left" dataKey="rain" name="Rain" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-          <Bar yAxisId="left" dataKey="snow" name="Snow" fill="#a5b4fc" radius={[4, 4, 0, 0]} />
-          <Line yAxisId="right" type="monotone" dataKey="probability" name="Probability" stroke="#f59e0b" strokeWidth={2} dot={{ r: 4 }} />
+          <Bar yAxisId="left" dataKey="rain" name="Rain" fill={CHART_COLORS.rain} radius={[4, 4, 0, 0]} />
+          <Bar yAxisId="left" dataKey="snow" name="Snow" fill={CHART_COLORS.snow} radius={[4, 4, 0, 0]} />
+          <Line yAxisId="right" type="monotone" dataKey="probability" name="Probability" stroke={CHART_COLORS.precipProbability} strokeWidth={2} dot={{ r: 4 }} />
         </ComposedChart>
       </ResponsiveContainer>
     </Card>

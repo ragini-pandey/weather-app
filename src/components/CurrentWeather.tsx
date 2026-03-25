@@ -1,5 +1,6 @@
 import { Wind, Compass } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import { WEATHER_CODE_MAP, WEATHER_CODE_DEFAULT } from "@/constants"
 
 interface CurrentWeatherProps {
   data: {
@@ -13,23 +14,7 @@ interface CurrentWeatherProps {
 }
 
 function getWeatherDescription(code: number) {
-  const map: Record<number, { description: string; icon: string }> = {
-    0: { description: "Clear sky", icon: "☀️" },
-    1: { description: "Mainly clear", icon: "🌤️" },
-    2: { description: "Partly cloudy", icon: "⛅" },
-    3: { description: "Overcast", icon: "☁️" },
-    45: { description: "Foggy", icon: "🌫️" },
-    48: { description: "Depositing rime fog", icon: "🌫️" },
-    51: { description: "Light drizzle", icon: "🌦️" },
-    61: { description: "Slight rain", icon: "🌧️" },
-    63: { description: "Moderate rain", icon: "🌧️" },
-    65: { description: "Heavy rain", icon: "🌧️" },
-    71: { description: "Slight snowfall", icon: "🌨️" },
-    73: { description: "Moderate snowfall", icon: "🌨️" },
-    75: { description: "Heavy snowfall", icon: "❄️" },
-    95: { description: "Thunderstorm", icon: "⛈️" },
-  }
-  return map[code] ?? { description: "Unknown", icon: "🌡️" }
+  return WEATHER_CODE_MAP[code] ?? WEATHER_CODE_DEFAULT
 }
 
 export default function CurrentWeather({ data }: CurrentWeatherProps) {

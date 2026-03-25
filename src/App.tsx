@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { format, addDays, parseISO } from "date-fns"
+import { FORECAST_DAYS, DATE_FORMAT_API, DASHBOARD_FEATURES } from "@/constants"
 import { fetchWeather } from "./services/weatherApi"
 import SearchForm from "./components/SearchForm"
 import CurrentWeather from "./components/CurrentWeather"
@@ -36,7 +37,7 @@ export default function App() {
 
     try {
       const startDate = date
-      const endDate = format(addDays(parseISO(date), 6), "yyyy-MM-dd")
+      const endDate = format(addDays(parseISO(date), FORECAST_DAYS), DATE_FORMAT_API)
       const data = await fetchWeather(latitude, longitude, startDate, endDate)
       setWeatherData(data)
       setSearchInfo({ latitude, longitude, date })
@@ -69,22 +70,12 @@ export default function App() {
             </p>
             <SearchForm onSearch={handleSearch} loading={loading} />
             <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-lg w-full text-center">
-              <div className="flex flex-col items-center gap-1.5">
-                <span className="text-2xl">🌡️</span>
-                <span className="text-xs text-muted-foreground">Temperature</span>
-              </div>
-              <div className="flex flex-col items-center gap-1.5">
-                <span className="text-2xl">🌧️</span>
-                <span className="text-xs text-muted-foreground">Precipitation</span>
-              </div>
-              <div className="flex flex-col items-center gap-1.5">
-                <span className="text-2xl">💨</span>
-                <span className="text-xs text-muted-foreground">Wind Speed</span>
-              </div>
-              <div className="flex flex-col items-center gap-1.5">
-                <span className="text-2xl">☀️</span>
-                <span className="text-xs text-muted-foreground">UV Index</span>
-              </div>
+              {DASHBOARD_FEATURES.map((f) => (
+                <div key={f.label} className="flex flex-col items-center gap-1.5">
+                  <span className="text-2xl">{f.icon}</span>
+                  <span className="text-xs text-muted-foreground">{f.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

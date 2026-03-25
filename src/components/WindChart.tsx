@@ -11,6 +11,15 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts"
+import {
+  DATE_FORMAT_SHORT_DAY,
+  DATE_FORMAT_MONTH_DAY,
+  CHART_HEIGHT,
+  CHART_MARGIN,
+  CHART_TICK_FONT_SIZE,
+  CHART_GRID_STROKE,
+  CHART_COLORS,
+} from "@/constants"
 
 interface DailyData {
   time: string[]
@@ -23,8 +32,8 @@ export default function WindChart({ daily }: { daily: DailyData | null }) {
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({
-    date: format(parseISO(date), "EEE"),
-    fullDate: format(parseISO(date), "MMM d"),
+    date: format(parseISO(date), DATE_FORMAT_SHORT_DAY),
+    fullDate: format(parseISO(date), DATE_FORMAT_MONTH_DAY),
     speed: daily.windspeed_10m_max[i],
     gusts: daily.windgusts_10m_max[i],
   }))
@@ -35,12 +44,12 @@ export default function WindChart({ daily }: { daily: DailyData | null }) {
         <Wind className="h-7 w-7 sm:h-10 sm:w-10 text-emerald-500 animate-breeze" />
         Wind Speed & Gusts
       </h3>
-      <ResponsiveContainer width="100%" height={250}>
-        <LineChart data={data} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-          <XAxis dataKey="date" tick={{ fontSize: 12 }} />
+      <ResponsiveContainer width="100%" height={CHART_HEIGHT}>
+        <LineChart data={data} margin={CHART_MARGIN}>
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_GRID_STROKE} />
+          <XAxis dataKey="date" tick={{ fontSize: CHART_TICK_FONT_SIZE }} />
           <YAxis
-            tick={{ fontSize: 12 }}
+            tick={{ fontSize: CHART_TICK_FONT_SIZE }}
             tickFormatter={(v) => `${v}`}
             label={{ value: "km/h", angle: -90, position: "insideLeft", style: { fontSize: 12 } }}
           />
@@ -52,8 +61,8 @@ export default function WindChart({ daily }: { daily: DailyData | null }) {
             labelFormatter={(_, payload) => payload?.[0]?.payload?.fullDate || ""}
           />
           <Legend />
-          <Line type="monotone" dataKey="speed" name="Max Speed" stroke="#10b981" strokeWidth={2} dot={{ r: 4, fill: "#10b981" }} />
-          <Line type="monotone" dataKey="gusts" name="Gusts" stroke="#f43f5e" strokeWidth={2} dot={{ r: 4, fill: "#f43f5e" }} strokeDasharray="5 5" />
+          <Line type="monotone" dataKey="speed" name="Max Speed" stroke={CHART_COLORS.windSpeed} strokeWidth={2} dot={{ r: 4, fill: CHART_COLORS.windSpeed }} />
+          <Line type="monotone" dataKey="gusts" name="Gusts" stroke={CHART_COLORS.windGusts} strokeWidth={2} dot={{ r: 4, fill: CHART_COLORS.windGusts }} strokeDasharray="5 5" />
         </LineChart>
       </ResponsiveContainer>
     </Card>

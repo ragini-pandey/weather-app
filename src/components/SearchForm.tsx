@@ -7,31 +7,17 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardDescription } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import {
+  CAPITAL_CITIES,
+  QUICK_PICK_COUNT,
+  DATE_FORMAT_API,
+  LAT_MIN,
+  LAT_MAX,
+  LON_MIN,
+  LON_MAX,
+} from "@/constants"
 
-const today = format(new Date(), "yyyy-MM-dd")
-
-const CAPITAL_CITIES = [
-  { label: "Singapore", lat: 1.3521, lon: 103.8198 },
-  { label: "London", lat: 51.5074, lon: -0.1278 },
-  { label: "Tokyo", lat: 35.6762, lon: 139.6503 },
-  { label: "New Delhi", lat: 28.6139, lon: 77.209 },
-  { label: "Paris", lat: 48.8566, lon: 2.3522 },
-  { label: "New York", lat: 40.7128, lon: -74.006 },
-  { label: "Sydney", lat: -33.8688, lon: 151.2093 },
-  { label: "Dubai", lat: 25.2048, lon: 55.2708 },
-  { label: "Berlin", lat: 52.52, lon: 13.405 },
-  { label: "Beijing", lat: 39.9042, lon: 116.4074 },
-  { label: "Seoul", lat: 37.5665, lon: 126.978 },
-  { label: "Bangkok", lat: 13.7563, lon: 100.5018 },
-  { label: "Cairo", lat: 30.0444, lon: 31.2357 },
-  { label: "Toronto", lat: 43.6532, lon: -79.3832 },
-  { label: "São Paulo", lat: -23.5505, lon: -46.6333 },
-  { label: "Moscow", lat: 55.7558, lon: 37.6173 },
-  { label: "Rome", lat: 41.9028, lon: 12.4964 },
-  { label: "Istanbul", lat: 41.0082, lon: 28.9784 },
-  { label: "Nairobi", lat: -1.2921, lon: 36.8219 },
-  { label: "Mexico City", lat: 19.4326, lon: -99.1332 },
-]
+const today = format(new Date(), DATE_FORMAT_API)
 
 interface SearchFormProps {
   onSearch: (params: { latitude: number; longitude: number; date: string }) => void
@@ -48,10 +34,10 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
   function validate() {
     const lat = parseFloat(latitude)
     const lon = parseFloat(longitude)
-    if (isNaN(lat) || lat < -90 || lat > 90)
-      return "Latitude must be between -90 and 90."
-    if (isNaN(lon) || lon < -180 || lon > 180)
-      return "Longitude must be between -180 and 180."
+    if (isNaN(lat) || lat < LAT_MIN || lat > LAT_MAX)
+      return `Latitude must be between ${LAT_MIN} and ${LAT_MAX}.`
+    if (isNaN(lon) || lon < LON_MIN || lon > LON_MAX)
+      return `Longitude must be between ${LON_MIN} and ${LON_MAX}.`
     if (!date) return "Please select a date."
     return ""
   }
@@ -105,8 +91,8 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
             id="lat-compact"
             type="number"
             step="any"
-            min={-90}
-            max={90}
+            min={LAT_MIN}
+            max={LAT_MAX}
             value={latitude}
             onChange={(e) => setLatitude(e.target.value)}
             required
@@ -119,8 +105,8 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
             id="lon-compact"
             type="number"
             step="any"
-            min={-180}
-            max={180}
+            min={LON_MIN}
+            max={LON_MAX}
             value={longitude}
             onChange={(e) => setLongitude(e.target.value)}
             required
@@ -158,7 +144,7 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
       </CardHeader>
       <CardContent className="space-y-5">
         <div className="flex flex-wrap justify-center gap-2">
-          {CAPITAL_CITIES.slice(0, 5).map((loc) => (
+          {CAPITAL_CITIES.slice(0, QUICK_PICK_COUNT).map((loc) => (
             <Badge
               key={loc.label}
               variant="outline"

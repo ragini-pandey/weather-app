@@ -1,6 +1,7 @@
 import { format, parseISO } from "date-fns"
 import { Card } from "@/components/ui/card"
 import { getWeatherDescription } from "./CurrentWeather"
+import { DATE_FORMAT_FULL_DAY } from "@/constants"
 
 interface DailyData {
   time: string[]
@@ -27,7 +28,7 @@ export default function DailyForecast({ daily }: { daily: DailyData | null }) {
               className="p-3 sm:p-4 text-center hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
             >
               <p className="text-[10px] sm:text-xs font-semibold text-muted-foreground">
-                {format(parseISO(date), "EEE, MMM d")}
+                {format(parseISO(date), DATE_FORMAT_FULL_DAY)}
               </p>
               <div className="text-2xl sm:text-4xl my-1.5 sm:my-2">{icon}</div>
               <p className="text-sm text-muted-foreground mb-2">{description}</p>
