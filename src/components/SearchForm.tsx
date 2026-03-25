@@ -70,8 +70,8 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
 
   if (compact) {
     return (
-      <form onSubmit={handleSubmit} className="flex flex-wrap items-end gap-2 sm:gap-3">
-        <div className="space-y-1 w-full sm:w-48">
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 sm:flex sm:flex-wrap sm:items-end gap-2 sm:gap-3">
+        <div className="space-y-1 col-span-2 sm:w-48">
           <Label htmlFor="city-compact" className="text-xs">City</Label>
           <select
             id="city-compact"
@@ -85,7 +85,7 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
           </select>
         </div>
 
-        <div className="space-y-1 w-[calc(50%-4px)] sm:w-auto">
+        <div className="space-y-1 sm:w-auto">
           <Label htmlFor="lat-compact" className="text-xs">Lat</Label>
           <Input
             id="lat-compact"
@@ -99,7 +99,7 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
             className="sm:w-24 h-9"
           />
         </div>
-        <div className="space-y-1 w-[calc(50%-4px)] sm:w-auto">
+        <div className="space-y-1 sm:w-auto">
           <Label htmlFor="lon-compact" className="text-xs">Lon</Label>
           <Input
             id="lon-compact"
@@ -113,7 +113,7 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
             className="sm:w-24 h-9"
           />
         </div>
-        <div className="space-y-1 w-full sm:w-auto">
+        <div className="space-y-1 sm:w-auto">
           <Label htmlFor="date-compact" className="text-xs">Date</Label>
           <Input
             id="date-compact"
@@ -124,12 +124,12 @@ export default function SearchForm({ onSearch, loading, compact = false }: Searc
             className="sm:w-36 h-9"
           />
         </div>
-        <Button type="submit" size="sm" disabled={loading}>
+        <Button type="submit" size="sm" disabled={loading} className="self-end h-9">
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
           <span className="ml-1.5">Search</span>
         </Button>
         {error && (
-          <Alert variant="destructive" className="w-full">
+          <Alert variant="destructive" className="col-span-2 w-full">
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
