@@ -14,6 +14,11 @@ A modern weather forecast dashboard built with React, TypeScript, and Vite. Get 
 
 ![Weather Report - Forecast](https://raw.githubusercontent.com/ragini-pandey/weather-app/main/public/report-2.png)
 
+### Responsive Design
+![Responsive - Mobile View 1](https://raw.githubusercontent.com/ragini-pandey/weather-app/main/public/responsive-1.png)
+
+![Responsive - Mobile View 2](https://raw.githubusercontent.com/ragini-pandey/weather-app/main/public/responsive-2.png)
+
 ## Features
 
 - **Current Weather** — Real-time temperature, wind speed, wind direction, and weather conditions
@@ -87,8 +92,8 @@ npm run preview
 
 ### Usage
 
-1. Enter latitude, longitude, start date, and end date — or pick a city from the presets.
-2. Click **Search** to fetch weather data.
+1. Enter latitude and longitude, and a start date — or pick a city from the presets.
+2. Click **Get Weather Forecast** (or **Search** in the compact header form) to fetch weather data.
 3. Explore current conditions, temperature trends, precipitation, wind, UV index, and the 7-day forecast.
 
 ## Project Structure
@@ -96,6 +101,7 @@ npm run preview
 ```
 src/
 ├── App.tsx                     # Main app with landing + dashboard views
+├── constants.ts                # Shared constants (API config, cities, chart settings, etc.)
 ├── index.css                   # Tailwind theme, animations, global styles
 ├── main.tsx                    # Entry point
 ├── services/
