@@ -4,6 +4,16 @@ A modern weather forecast dashboard built with React, TypeScript, and Vite. Get 
 
 **Live Demo:** [weather-app-ragini.vercel.app](https://weather-app-ragini.vercel.app/)
 
+## Screenshots
+
+### Landing Page
+![Landing Page](https://raw.githubusercontent.com/ragini-pandey/weather-app/main/public/landing-page.png)
+
+### Weather Dashboard
+![Weather Report - Charts](https://raw.githubusercontent.com/ragini-pandey/weather-app/main/public/report-1.png)
+
+![Weather Report - Forecast](https://raw.githubusercontent.com/ragini-pandey/weather-app/main/public/report-2.png)
+
 ## Features
 
 - **Current Weather** — Real-time temperature, wind speed, wind direction, and weather conditions
