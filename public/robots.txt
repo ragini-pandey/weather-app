@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://github.com/ragini-pandey/weather-app/tree/main/public/sitemap.xml

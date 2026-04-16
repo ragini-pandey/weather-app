@@ -2,18 +2,11 @@ import { format, parseISO } from "date-fns"
 import { Card } from "@/components/ui/card"
 import { getWeatherDescription } from "./CurrentWeather"
 import { DATE_FORMAT_FULL_DAY } from "@/constants"
+import type { DailyData } from "@/types"
 
-interface DailyData {
-  time: string[]
-  weathercode: number[]
-  temperature_2m_max: number[]
-  temperature_2m_min: number[]
-  precipitation_sum: number[]
-  windspeed_10m_max: number[]
-  uv_index_max: number[]
-}
+type DailyForecastData = Pick<DailyData, 'time' | 'weathercode' | 'temperature_2m_max' | 'temperature_2m_min' | 'precipitation_sum' | 'windspeed_10m_max' | 'uv_index_max'>
 
-export default function DailyForecast({ daily }: { daily: DailyData | null }) {
+export default function DailyForecast({ daily }: { daily: DailyForecastData | null }) {
   if (!daily?.time?.length) return null
 
   return (

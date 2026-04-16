@@ -21,16 +21,11 @@ import {
   CHART_GRID_STROKE,
   CHART_COLORS,
 } from "@/constants"
+import type { DailyData } from "@/types"
 
-interface DailyData {
-  time: string[]
-  rain_sum: number[]
-  snowfall_sum: number[]
-  precipitation_sum: number[]
-  precipitation_probability_max: number[]
-}
+type PrecipitationChartData = Pick<DailyData, 'time' | 'rain_sum' | 'snowfall_sum' | 'precipitation_sum' | 'precipitation_probability_max'>
 
-export default function PrecipitationChart({ daily }: { daily: DailyData | null }) {
+export default function PrecipitationChart({ daily }: { daily: PrecipitationChartData | null }) {
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({

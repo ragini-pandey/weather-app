@@ -16,6 +16,7 @@ import {
   UV_COLOR_THRESHOLDS,
   UV_LABEL_THRESHOLDS,
   UV_LABEL_EXTREME,
+  UV_LEGEND,
   DATE_FORMAT_SHORT_DAY,
   DATE_FORMAT_MONTH_DAY,
   CHART_HEIGHT,
@@ -23,6 +24,9 @@ import {
   CHART_TICK_FONT_SIZE,
   CHART_GRID_STROKE,
 } from "@/constants"
+import type { DailyData } from "@/types"
+
+type UVIndexChartData = Pick<DailyData, 'time' | 'uv_index_max'>
 
 function getUVColor(uv: number) {
   for (let i = 0; i < UV_COLOR_THRESHOLDS.length; i++) {
@@ -38,12 +42,7 @@ function getUVLabel(uv: number) {
   return UV_LABEL_EXTREME
 }
 
-interface DailyData {
-  time: string[]
-  uv_index_max: number[]
-}
-
-export default function UVIndexChart({ daily }: { daily: DailyData | null }) {
+export default function UVIndexChart({ daily }: { daily: UVIndexChartData | null }) {
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({
@@ -75,13 +74,7 @@ export default function UVIndexChart({ daily }: { daily: DailyData | null }) {
         </BarChart>
       </ResponsiveContainer>
       <div className="flex flex-wrap justify-center gap-3 mt-3 text-xs">
-        {[
-          { label: "Low (0-2)", color: UV_COLORS[0] },
-          { label: "Moderate (3-5)", color: UV_COLORS[2] },
-          { label: "High (6-7)", color: UV_COLORS[3] },
-          { label: "Very High (8-10)", color: UV_COLORS[4] },
-          { label: "Extreme (11+)", color: UV_COLORS[5] },
-        ].map((item) => (
+        {UV_LEGEND.map((item) => (
           <div key={item.label} className="flex items-center gap-1">
             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
             <span className="text-slate-500">{item.label}</span>

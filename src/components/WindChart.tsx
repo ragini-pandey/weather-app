@@ -20,15 +20,11 @@ import {
   CHART_GRID_STROKE,
   CHART_COLORS,
 } from "@/constants"
+import type { DailyData } from "@/types"
 
-interface DailyData {
-  time: string[]
-  windspeed_10m_max: number[]
-  windgusts_10m_max: number[]
-  winddirection_10m_dominant: number[]
-}
+type WindChartData = Pick<DailyData, 'time' | 'windspeed_10m_max' | 'windgusts_10m_max' | 'winddirection_10m_dominant'>
 
-export default function WindChart({ daily }: { daily: DailyData | null }) {
+export default function WindChart({ daily }: { daily: WindChartData | null }) {
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({

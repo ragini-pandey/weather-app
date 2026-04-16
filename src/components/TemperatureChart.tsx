@@ -20,16 +20,11 @@ import {
   CHART_GRID_STROKE,
   CHART_COLORS,
 } from "@/constants"
+import type { DailyData } from "@/types"
 
-interface DailyData {
-  time: string[]
-  temperature_2m_max: number[]
-  temperature_2m_min: number[]
-  apparent_temperature_max: number[]
-  apparent_temperature_min: number[]
-}
+type TemperatureChartData = Pick<DailyData, 'time' | 'temperature_2m_max' | 'temperature_2m_min' | 'apparent_temperature_max' | 'apparent_temperature_min'>
 
-export default function TemperatureChart({ daily }: { daily: DailyData | null }) {
+export default function TemperatureChart({ daily }: { daily: TemperatureChartData | null }) {
   if (!daily?.time?.length) return null
 
   const data = daily.time.map((date, i) => ({

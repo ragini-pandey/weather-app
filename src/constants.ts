@@ -86,6 +86,14 @@ export const UV_LABEL_THRESHOLDS: { max: number; label: string }[] = [
 ]
 export const UV_LABEL_EXTREME = "Extreme"
 
+export const UV_LEGEND = [
+  { label: "Low (0-2)", color: UV_COLORS[0] },
+  { label: "Moderate (3-5)", color: UV_COLORS[2] },
+  { label: "High (6-7)", color: UV_COLORS[3] },
+  { label: "Very High (8-10)", color: UV_COLORS[4] },
+  { label: "Extreme (11+)", color: UV_COLORS[5] },
+] as const
+
 export const CHART_HEIGHT = 250
 export const CHART_MARGIN = { top: 5, right: 20, left: 0, bottom: 5 } as const
 export const CHART_TICK_FONT_SIZE = 12
